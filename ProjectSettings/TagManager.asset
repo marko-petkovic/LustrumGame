@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Wall
+  - Gewis
+  - Floor
+  - Menu
+  - Audio
+  - Table
+  - Destrucitble
+  - ScoreText
+  - TextLoc
+  - Bullet
+  - Boomer
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - Wall
+  - Character
+  - Bullet
+  - IgnoreCollision
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 2342291927
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
