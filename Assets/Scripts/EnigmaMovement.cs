@@ -16,11 +16,13 @@ public class EnigmaMovement : MonoBehaviour
 
     public bool shotgun = false;
     public bool doublegun = false;
+    public bool boss = false;
 
     public float nextWaypointDistance = 3f; 
 
     public Transform firePoint;
     public Transform firePoint2;
+    public Transform firePoint3;
     public GameObject bulletPrefab;
     public GameObject playerObject;
 
@@ -39,6 +41,8 @@ public class EnigmaMovement : MonoBehaviour
     private bool chasing = false;
     private bool returningToPatrol = false;
 
+    private Animator anim;
+
     Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
@@ -51,9 +55,14 @@ public class EnigmaMovement : MonoBehaviour
 
     // Index of current waypoint from which Enemy walks
     // to the next one
-    private int waypointIndex = 0;
+    public int waypointIndex = 0;
 
 
+    private void Awake()
+    {
+        if (boss)
+            anim = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -108,6 +117,12 @@ public class EnigmaMovement : MonoBehaviour
                 //Debug.Log(hit.collider.name);
                 if (hit.collider.tag == "Player")
                 {
+
+                    if (!chasing && boss)
+                    {
+                        anim.SetBool("chasing", true);
+                    }
+
                     returningToPatrol = false;
                     chasing = true;
                     //Debug.Log("Player spotted!");
@@ -152,6 +167,8 @@ public class EnigmaMovement : MonoBehaviour
                 {
                     if (chasing)
                     {
+                        if (boss)
+                            anim.SetBool("chasing", false);
                         chasing = false;
                         returningToPatrol = true;
                         int bestWayPoint = 0;
@@ -218,12 +235,19 @@ public class EnigmaMovement : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             bullet.GetComponent<Bullet>().damage = bulletDamage;
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-            if (doublegun)
+            if (doublegun || boss)
             {
                 GameObject bullet2 = Instantiate(bulletPrefab, firePoint2.position, firePoint2.rotation);
                 bullet2.GetComponent<Bullet>().damage = bulletDamage;
                 Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
                 rb2.AddForce(firePoint2.up * bulletForce, ForceMode2D.Impulse);
+            }
+            if (boss)
+            {
+                GameObject bullet3 = Instantiate(bulletPrefab, firePoint3.position, firePoint3.rotation);
+                bullet3.GetComponent<Bullet>().damage = bulletDamage*0.5f;
+                Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
+                rb3.AddForce(firePoint2.up * bulletForce, ForceMode2D.Impulse);
             }
         }
         //GameObject bullet = 
@@ -312,7 +336,7 @@ public class EnigmaMovement : MonoBehaviour
             // If Enemy reaches position of waypoint he walked towards
             // then waypointIndex is increased by 1
             // and Enemy starts to walk to the next waypoint
-            if (transform.position == waypoints[waypointIndex].transform.position)
+            if (Vector2.Distance(transform.position, waypoints[waypointIndex].transform.position) < 0.3f)
             {
                 waypointIndex += 1;
             }
