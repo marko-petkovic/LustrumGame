@@ -11,6 +11,10 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
 
 
+    public GameObject extraGunVisual;
+    public Image timeBar;
+
+
     public Transform extraGun1;
     public Transform extraGun2;
     public Transform extraGun3;
@@ -38,12 +42,21 @@ public class Shooting : MonoBehaviour
 
     private DateTime reloadStart = DateTime.Now.AddSeconds(-10d);
     private List<float> damageMultiplier = new List<float> { 0.5f, 1f, 1.5f, 2f };
-
+    private float gunWaitTime = 5f;
+    private DateTime gunTime;
     public float bulletForce = 200f;
     
     // Update is called once per frame
     void Update()
     {
+        if (extraGuns)
+        {
+            var timeWaited = (DateTime.Now - gunTime).TotalSeconds;
+            var curr = timeBar.rectTransform.sizeDelta;
+            curr.x = (float)curr.x * (float)timeWaited/gunWaitTime;
+            timeBar.rectTransform.sizeDelta = curr;
+        }
+
 
         if (reloading && (DateTime.Now - reloadStart).TotalSeconds > reloadTime)
         {
@@ -107,15 +120,15 @@ public class Shooting : MonoBehaviour
     {
         extraGuns = true;
         extraGunsAnim.SetBool("ExtraGuns", true);
-
+        extraGunVisual.SetActive(true);
         StartCoroutine(DeActivateGuns());
         
     }
 
     IEnumerator DeActivateGuns()
     {
-        yield return new WaitForSeconds(10f);
-
+        yield return new WaitForSeconds(gunWaitTime);
+        extraGunVisual.SetActive(false);
         extraGunsAnim.SetBool("ExtraGuns", false);
         extraGuns = false;
     }
