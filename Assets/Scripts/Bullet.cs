@@ -30,11 +30,19 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject col = collision.gameObject;
+        //GameObject col = collision.gameObject;
+        GameObject col = collision.collider.gameObject;
         var instPos = col.transform.position;
 
-
-        if (col.tag == "Gewis" || col.tag == "Player" || col.tag == "Boomer")
+        
+        if (col.tag == "Wall" || col.tag == "PlayerWall")
+        {
+            audioManager.Play(name: "Wall", soundPos: transform.position);
+            GameObject effect = Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(effect, .75f);
+            Destroy(gameObject);
+        }
+        else if (col.tag == "Gewis" || col.tag == "Player" || col.tag == "Boomer")
         {
             audioManager.Play("Body", transform.position);
             health = col.GetComponent<HealthManager>();
@@ -87,13 +95,7 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if (col.tag == "Wall")
-        {
-            audioManager.Play(name: "Wall", soundPos: transform.position);
-            GameObject effect = Instantiate(explosion, transform.position, transform.rotation);
-            Destroy(effect, .75f);
-            Destroy(gameObject);
-        }
+         
         else if (col.tag == "Destrucitble")
         {
             audioManager.Play("Wall", transform.position);

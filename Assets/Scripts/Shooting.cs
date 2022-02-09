@@ -85,11 +85,19 @@ public class Shooting : MonoBehaviour
             animator.SetBool("reloading", false);
         }
 
-        if (!reloading && PlayerScore.bulletsInClip != 30 & ( PlayerScore.bulletsInClip == 0 || Input.GetKeyDown("r")))
+        if (!reloading && PlayerScore.bulletsInClip != 30 && PlayerScore.ammoAmount > 0 && ( PlayerScore.bulletsInClip == 0 || Input.GetKeyDown("r")))
         {
-            
-            PlayerScore.ammoAmount -= (30-PlayerScore.bulletsInClip);
-            PlayerScore.bulletsInClip = 30;
+            if (PlayerScore.ammoAmount + PlayerScore.bulletsInClip >= 30)
+            {
+                PlayerScore.ammoAmount -= (30 - PlayerScore.bulletsInClip);
+                PlayerScore.bulletsInClip = 30;
+            }
+            else 
+            {
+                PlayerScore.bulletsInClip += PlayerScore.ammoAmount; 
+                PlayerScore.ammoAmount = 0;
+
+            }
             reloading = true;
             animator.SetBool("reloading", true);
             reloadStart = DateTime.Now;
