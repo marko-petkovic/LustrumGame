@@ -336,7 +336,7 @@ public class EnigmaMovement : MonoBehaviour
             // If Enemy reaches position of waypoint he walked towards
             // then waypointIndex is increased by 1
             // and Enemy starts to walk to the next waypoint
-            if (Vector2.Distance(transform.position, waypoints[waypointIndex].transform.position) < 0.3f)
+            if (Vector2.Distance(transform.position, waypoints[waypointIndex].transform.position) < .3f)
             {
                 waypointIndex += 1;
             }
@@ -362,7 +362,7 @@ public class EnigmaMovement : MonoBehaviour
             // If Enemy reaches position of waypoint he walked towards
             // then waypointIndex is increased by 1
             // and Enemy starts to walk to the next waypoint
-            if (transform.position == waypoints[waypointIndex].transform.position)
+            if (Vector2.Distance(transform.position, waypoints[waypointIndex].transform.position) < .3f)
             {
                 waypointIndex -= 1;
             }

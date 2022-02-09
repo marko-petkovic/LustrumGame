@@ -15,6 +15,7 @@ TagManager:
   - TextLoc
   - Bullet
   - Boomer
+  - ComputerSuper
   layers:
   - Default
   - TransparentFX

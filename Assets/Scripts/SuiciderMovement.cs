@@ -34,6 +34,7 @@ public class SuiciderMovement : MonoBehaviour
     private bool chasing = false;
     private bool returningToPatrol = false;
 
+
     Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
