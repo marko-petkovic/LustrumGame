@@ -60,7 +60,15 @@ public class Bullet : MonoBehaviour
                     PlayerScore.Score += 100;
                     var txt = Instantiate(addScoreText, textLoc);
                     txt.text = "Suicider killed: +75";
-                    col.GetComponent<SuiciderMovement>().Boom();
+                    try
+                    {
+                        col.GetComponent<SuiciderMovement>().Boom();
+                    }
+                    catch
+                    {
+                        col.GetComponent<EnigmaMine>().Explode();
+                    }
+                        
                 }
                 else
                 {
