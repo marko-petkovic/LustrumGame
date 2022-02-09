@@ -71,7 +71,7 @@ public class EnigmaMovement : MonoBehaviour
         bulletsInMag = burstLength;
         rb = GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
-        InvokeRepeating("UpdatePath", 0f, 1f);
+        InvokeRepeating("UpdatePath", 0f, .5f);
     }
 
     void OnPathComplete(Path p)
@@ -85,11 +85,13 @@ public class EnigmaMovement : MonoBehaviour
 
     void UpdatePath()
     {
-        if (seeker.IsDone() && !returningToPatrol && playerObject != null)
-            seeker.StartPath((Vector2)transform.position, (Vector2)playerObject.transform.position, OnPathComplete);
-        else if (seeker.IsDone() && returningToPatrol)
-            seeker.StartPath(transform.position, waypoints[waypointIndex].position, OnPathComplete);
-
+        if (true || chasing || returningToPatrol)
+        {
+            if (seeker.IsDone() && !returningToPatrol && playerObject != null)
+                seeker.StartPath((Vector2)transform.position, (Vector2)playerObject.transform.position, OnPathComplete);
+            else if (seeker.IsDone() && returningToPatrol)
+                seeker.StartPath(transform.position, waypoints[waypointIndex].position, OnPathComplete);
+        }
     }
 
     // Update is called once per frame

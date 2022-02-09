@@ -10,6 +10,15 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
+
+    public Transform extraGun1;
+    public Transform extraGun2;
+    public Transform extraGun3;
+    public Transform extraGun4;
+    public Transform extraGun5;
+    public Animator extraGunsAnim;
+    public bool extraGuns = false;
+
     //public int bulletsInClip = 30;
     //public int ammoAmount = 90;
     public bool reloading;
@@ -70,6 +79,45 @@ public class Shooting : MonoBehaviour
         //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        if (extraGuns)
+        {
+            ExtraShoot(extraGun1);
+            ExtraShoot(extraGun2);
+            ExtraShoot(extraGun3);
+            ExtraShoot(extraGun4);
+            ExtraShoot(extraGun5);
+            //GameObject bullet1 = Instantiate(bulletPrefab, extraGun1.position, extraGun1.rotation);
+            //bullet1.GetComponent<Bullet>().damage *= damageMultiplier[gunLevel];
+            ////GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            //Rigidbody2D rb1 = bullet1.GetComponent<Rigidbody2D>();
+            //rb.AddForce(extraGun1.up * bulletForce, ForceMode2D.Impulse);
+        }
+    }
+
+    void ExtraShoot(Transform extraGun)
+    {
+        var bullet1 = Instantiate(bulletPrefab, extraGun.position, extraGun.rotation);
+        bullet1.GetComponent<Bullet>().damage *= damageMultiplier[gunLevel];
+        //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb1 = bullet1.GetComponent<Rigidbody2D>();
+        rb1.AddForce(extraGun.up * bulletForce, ForceMode2D.Impulse);
+    }
+
+    public void ActivateExtraGuns()
+    {
+        extraGuns = true;
+        extraGunsAnim.SetBool("ExtraGuns", true);
+
+        StartCoroutine(DeActivateGuns());
+        
+    }
+
+    IEnumerator DeActivateGuns()
+    {
+        yield return new WaitForSeconds(10f);
+
+        extraGunsAnim.SetBool("ExtraGuns", false);
+        extraGuns = false;
     }
 
     public void UpgradeGun()

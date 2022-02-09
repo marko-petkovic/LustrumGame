@@ -26,7 +26,10 @@ public class SuperComputer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (allGPUS && Vector2.Distance(playerTransform, transform.position+switcherino.transform.position) < 5f)
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if ( allGPUS && collision.gameObject.tag == "Player")
         {
             switcherino.GetComponent<SpriteRenderer>().sprite = switchOpen;
             doors.SetBool("OpenDoor", true);
