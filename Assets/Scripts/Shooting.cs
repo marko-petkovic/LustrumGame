@@ -23,6 +23,17 @@ public class Shooting : MonoBehaviour
     public Animator extraGunsAnim;
     public bool extraGuns = false;
 
+
+    public Animator wallAnimator;
+    public bool extraWalls = false;
+    public GameObject wallVisual;
+    public Image wallBar;
+
+    public float shieldWaitTime = 7.5f;
+    private DateTime shieldTime;
+
+
+
     //public int bulletsInClip = 30;
     //public int ammoAmount = 90;
     public bool reloading;
@@ -52,10 +63,19 @@ public class Shooting : MonoBehaviour
         if (extraGuns)
         {
             float prop = (float)(1 - (DateTime.Now - gunTime).TotalSeconds/ gunWaitTime);
-            Debug.Log(prop);
+       
             var rectt = timeBar.GetComponent<RectTransform>();
             rectt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, prop*400f);
-            }
+        }
+
+        if (extraWalls)
+        {
+            float prop = (float)(1 - (DateTime.Now - shieldTime).TotalSeconds / shieldWaitTime);
+
+            var rectt = wallBar.GetComponent<RectTransform>();
+            rectt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, prop * 400f);
+
+        }
 
 
         if (reloading && (DateTime.Now - reloadStart).TotalSeconds > reloadTime)
@@ -132,6 +152,24 @@ public class Shooting : MonoBehaviour
         extraGunVisual.SetActive(false);
         extraGunsAnim.SetBool("ExtraGuns", false);
         extraGuns = false;
+    }
+
+    public void ActivateExtraShield()
+    {
+        extraWalls = true;
+        shieldTime = DateTime.Now;
+        wallAnimator.SetBool("Wall", true);
+        wallVisual.SetActive(true);
+        StartCoroutine(DeActivateShield());
+        
+    }
+
+    IEnumerator DeActivateShield()
+    {
+        yield return new WaitForSeconds(shieldWaitTime);
+        wallAnimator.SetBool("Wall", false);
+        wallVisual.SetActive(false);
+        extraWalls = false;
     }
 
     public void UpgradeGun()

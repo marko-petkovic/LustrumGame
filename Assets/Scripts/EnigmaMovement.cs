@@ -117,7 +117,7 @@ public class EnigmaMovement : MonoBehaviour
             {
                 //Debug.Log(hit.transform.name);
                 //Debug.Log(hit.collider.name);
-                if (hit.collider.tag == "Player")
+                if (hit.collider.tag == "Player" || hit.collider.tag == "PlayerWall")
                 {
 
                     if (!chasing && boss)

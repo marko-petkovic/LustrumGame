@@ -16,6 +16,8 @@ TagManager:
   - Bullet
   - Boomer
   - ComputerSuper
+  - EnigmaPC
+  - PlayerWall
   layers:
   - Default
   - TransparentFX

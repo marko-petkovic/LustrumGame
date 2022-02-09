@@ -108,6 +108,31 @@ public class Bullet : MonoBehaviour
             Destroy(effect, .75f);
             Destroy(gameObject);
         }
+        else if (col.tag == "EnigmaPC")
+        {
+            audioManager.Play("Wall", transform.position);
+            health = col.GetComponent<HealthManager>();
+            health.Health -= damage;
+
+            if (health.Health <= 0)
+            {
+                audioManager.Play("Boom", transform.position);
+                GameObject effect = Instantiate(explosion, instPos, transform.rotation);
+
+
+                PlayerScore.Score += 500;
+                var txt = Instantiate(addScoreText, textLoc);
+                txt.text = "Pinder Saved: + 500";
+                txt.color = Color.green;
+
+                Destroy(col);
+                Destroy(txt, 10f);
+
+                Destroy(effect, 5f);
+               
+            }
+            Destroy(gameObject);
+        }
 
     }
 }
