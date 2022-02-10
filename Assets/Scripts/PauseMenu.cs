@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject winMenuUI;
     public GameObject deathMenuUI;
-    public PlayerVictory grolschKanon;
+
     public Text scoreText;
     //public HealthManager playerHealth;
 
