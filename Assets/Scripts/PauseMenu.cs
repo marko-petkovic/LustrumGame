@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     public TMP_InputField inputField;
 
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
 
     private AudioManager audioManager;
     //public HealthManager playerHealth;

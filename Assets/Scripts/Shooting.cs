@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shooting : MonoBehaviour
 {
@@ -48,8 +49,8 @@ public class Shooting : MonoBehaviour
     public SpriteRenderer currentGun;
 
 
-    public Text clip;
-    public Text ammo;
+    public TextMeshProUGUI clip;
+    public TextMeshProUGUI ammo;
 
     private DateTime reloadStart = DateTime.Now.AddSeconds(-10d);
     private List<float> damageMultiplier = new List<float> { 0.5f, 1f, 1.5f, 2f };
@@ -111,6 +112,27 @@ public class Shooting : MonoBehaviour
 
         clip.text = PlayerScore.bulletsInClip.ToString();
         ammo.text = PlayerScore.ammoAmount.ToString();
+
+        if (PlayerScore.bulletsInClip > 10)
+        {
+            clip.color = Color.white;
+
+        }
+        else if (PlayerScore.bulletsInClip > 5)
+        {
+            clip.color = Color.yellow;
+        }
+        else
+        {
+            clip.color = Color.red;
+        }
+
+        if (PlayerScore.ammoAmount == 0)
+        {
+            ammo.color = Color.red;
+        }
+
+
     }
 
     void Shoot()
