@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     private HealthManager health;
 
-    private void Start()
+    private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         textLoc = GameObject.FindGameObjectWithTag("TextLoc").transform;
@@ -44,7 +44,14 @@ public class Bullet : MonoBehaviour
         }
         else if (col.tag == "Gewis" || col.tag == "Player" || col.tag == "Boomer")
         {
-            audioManager.Play("Body", transform.position);
+            try
+            {
+                audioManager.Play("Body", col.transform.position);
+            }
+            catch
+            {
+                audioManager.Play("Body");
+            }
             health = col.GetComponent<HealthManager>();
             health.Health -= damage;
 

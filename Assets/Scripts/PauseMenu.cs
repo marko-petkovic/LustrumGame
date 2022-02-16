@@ -62,10 +62,11 @@ public class PauseMenu : MonoBehaviour
 
         if (PlayerScore.Score > PlayerPrefs.GetInt("Score10", 0))
         {
-            highScoreMenu.SetActive(true);
+            
             var rank = GetRank();
             string txt = string.Format("You are number {0} on the high score list!\n Please enter your name below!", rank.ToString());
             highText.text = txt;
+            highScoreMenu.SetActive(true);
         }
 
     }
@@ -73,8 +74,9 @@ public class PauseMenu : MonoBehaviour
     public void EnterName()
     {
         name = inputField.text;
-        UpdateScore(name, PlayerScore.Score);
         highScoreMenu.SetActive(false);
+        UpdateScore(name, PlayerScore.Score);
+        
     }
 
 
