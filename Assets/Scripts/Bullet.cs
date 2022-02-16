@@ -63,11 +63,18 @@ public class Bullet : MonoBehaviour
                     pauseMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<PauseMenu>();
                     pauseMenu.DeathMenu();
                 }
-                if (col.tag == "Gewis")
+                if (col.tag == "Gewis" && col.name != "Boss")
                 {
                     PlayerScore.Score += 50;
                     var txt = Instantiate(addScoreText, textLoc);
                     txt.text = "Enemy killed: +50";
+                    Destroy(txt, 10f);
+                }
+                else if (col.name == "Boss")
+                {
+                    PlayerScore.Score += 300;
+                    var txt = Instantiate(addScoreText, textLoc);
+                    txt.text = "Boss killed: +300";
                     Destroy(txt, 10f);
                 }
                 if (col.tag == "Boomer")

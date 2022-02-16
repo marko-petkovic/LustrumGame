@@ -165,6 +165,14 @@ public class EnigmaMovement : MonoBehaviour
                     returningToPatrol = false;
                     ChaseCharacter(false);
                 }
+                else if ((Vector2.Distance(transform.position, player.transform.position)) < 30f)
+                {
+                    chasing = true;
+                    returningToPatrol = false;
+                    ChaseCharacter(false);
+                    lastSeen = DateTime.Now;
+                }
+
                 else
                 {
                     if (chasing)
