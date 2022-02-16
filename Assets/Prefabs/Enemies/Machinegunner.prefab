@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7424386774812583783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.348, y: 2.098, z: 0}
+  m_LocalPosition: {x: -0.348, y: 2.69, z: 0}
   m_LocalScale: {x: 0.21267955, y: 1.0748148, z: 0.81081676}
   m_Children: []
   m_Father: {fileID: 7424386776893866323}
@@ -457,9 +457,11 @@ MonoBehaviour:
   distanceTres: 30
   shotgun: 0
   doublegun: 0
+  boss: 0
   nextWaypointDistance: 1
   firePoint: {fileID: 7424386774812583782}
   firePoint2: {fileID: 0}
+  firePoint3: {fileID: 0}
   bulletPrefab: {fileID: 3610146113163027571, guid: 8f401bf51c97426478db7c791b9dbce3,
     type: 3}
   playerObject: {fileID: 0}
@@ -470,6 +472,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  waypointIndex: 0
 --- !u!114 &7424386776893866321
 MonoBehaviour:
   m_ObjectHideFlags: 0
