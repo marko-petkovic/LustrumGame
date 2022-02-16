@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,14 +14,21 @@ public class MainMenu : MonoBehaviour
     public AudioMixer audioMixer;
 
 
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI highNameText;
+
     public GameObject title;
     public GameObject howTo;
+    public GameObject highScores;
 
     public GameObject general;
     public GameObject enemies;
     public GameObject special;
 
-
+    private void Start()
+    {
+        GetHighScores();
+    }
     public void PlayGame()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -68,6 +77,14 @@ public class MainMenu : MonoBehaviour
         title.SetActive(true);
         optionsMenu.SetActive(false);
         howTo.SetActive(false);
+        highScores.SetActive(false);
+    }
+
+
+    public void HighScore()
+    {
+        mainMenu.SetActive(false);
+        highScores.SetActive(true);
     }
 
     public void QuitGame()
@@ -89,5 +106,36 @@ public class MainMenu : MonoBehaviour
     public void SetSfxVolume(float volume)
     {
         audioMixer.SetFloat("sfxVolume", volume);
+    }
+
+    public void GetHighScores()
+    {
+        string names = "";
+        names += PlayerPrefs.GetString("Name1", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name2", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name3", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name4", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name5", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name6", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name7", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name8", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name9", "Marko") + "\n";
+        names += PlayerPrefs.GetString("Name10", "Marko");
+
+        highNameText.text = names;
+
+        string scores = "";
+        scores += PlayerPrefs.GetInt("Score1", 10).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score2", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score3", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score4", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score5", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score6", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score7", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score8", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score9", 0).ToString() + "\n";
+        scores += PlayerPrefs.GetInt("Score10", 0).ToString();
+
+        highScoreText.text = scores;
     }
 }

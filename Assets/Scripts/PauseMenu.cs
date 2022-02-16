@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -14,10 +15,21 @@ public class PauseMenu : MonoBehaviour
     public GameObject winMenuUI;
     public GameObject deathMenuUI;
 
+    public GameObject highScoreMenu;
+
+    public TextMeshProUGUI highText;
+
+    public TMP_InputField inputField;
+
     public Text scoreText;
+
+    private AudioManager audioManager;
     //public HealthManager playerHealth;
 
-
+    private void Start()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -45,7 +57,26 @@ public class PauseMenu : MonoBehaviour
         winMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+
+        audioManager.Stop("Alarm");
+
+        if (PlayerScore.Score > PlayerPrefs.GetInt("Score10", 0))
+        {
+            highScoreMenu.SetActive(true);
+            var rank = GetRank();
+            string txt = string.Format("You are number {0} on the high score list!\n Please enter your name below!", rank.ToString());
+            highText.text = txt;
+        }
+
     }
+
+    public void EnterName()
+    {
+        name = inputField.text;
+        UpdateScore(name, PlayerScore.Score);
+        highScoreMenu.SetActive(false);
+    }
+
 
     public void LevelWon()
     {
@@ -54,6 +85,8 @@ public class PauseMenu : MonoBehaviour
 
     public void DeathMenu()
     {
+
+        audioManager.Stop("Alarm");
         GameOver = true;
         deathMenuUI.SetActive(true);
     }
@@ -91,5 +124,85 @@ public class PauseMenu : MonoBehaviour
         levelLoader.StartLevel(0);
         //SceneManager.LoadScene(0);
         
+    }
+
+    int GetRank()
+    {
+        var score = PlayerScore.Score;
+        if (score > PlayerPrefs.GetInt("Score1", 0))
+        {
+            return 1;
+        }
+        else if (score > PlayerPrefs.GetInt("Score2", 0))
+        {
+            return 2;
+        }
+        else if (score > PlayerPrefs.GetInt("Score3", 0))
+        {
+            return 3;
+        }
+        else if (score > PlayerPrefs.GetInt("Score4", 0))
+        {
+            return 4;
+        }
+        else if (score > PlayerPrefs.GetInt("Score5", 0))
+        {
+            return 5;
+        }
+        else if (score > PlayerPrefs.GetInt("Score6", 0))
+        {
+            return 6;
+        }
+        else if (score > PlayerPrefs.GetInt("Score7", 0))
+        {
+            return 7;
+        }
+        else if (score > PlayerPrefs.GetInt("Score8", 0))
+        {
+            return 8;
+        }
+        else if (score > PlayerPrefs.GetInt("Score9", 0))
+        {
+            return 9;
+        }
+        else 
+        {
+            return 10;
+        }
+    }
+
+    void UpdateScore(string name, int score)
+    {
+        bool scoreUpdated = false;
+        int i = 1;
+
+        int prevScore = 0;
+        string prevName = "a";
+
+        while (i < 11)
+        {
+            var currScore = PlayerPrefs.GetInt(string.Format("Score{0}", i), 0);
+            var currName = PlayerPrefs.GetString(string.Format("Name{0}", i), "Marko");
+            if (score > currScore && !scoreUpdated)
+            {
+                prevScore = currScore;
+                prevName = currName;
+
+                PlayerPrefs.SetInt(string.Format("Score{0}", i), score);
+                PlayerPrefs.SetString(string.Format("Name{0}", i), name);
+
+                scoreUpdated = true;
+            }
+            else if (scoreUpdated)
+            {
+                PlayerPrefs.SetInt(string.Format("Score{0}", i), prevScore);
+                PlayerPrefs.SetString(string.Format("Name{0}", i), prevName);
+
+                prevScore = currScore;
+                prevName = currName;
+            }
+            
+            i++;
+        }
     }
 }
