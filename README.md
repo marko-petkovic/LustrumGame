@@ -1,3 +1,3 @@
 # LustrumGame
- LuCo game :))
-merkelmauer.github.io/LustrumGame
+ LuCo game :))\\
+\url{merkelmauer.github.io/LustrumGame}
