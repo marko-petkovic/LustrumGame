@@ -170,7 +170,7 @@ public class EnigmaMovement : MonoBehaviour
                     returningToPatrol = false;
                     ChaseCharacter(false);
                 }
-                else if ((Vector2.Distance(transform.position, player.transform.position)) < 30f && pathLength < 100)
+                else if ((Vector2.Distance(transform.position, player.transform.position)) < 30f && pathLength < 80)
                 {
                     chasing = true;
                     returningToPatrol = false;

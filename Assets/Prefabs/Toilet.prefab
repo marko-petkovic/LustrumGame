@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3005381563335192945}
   - component: {fileID: 3272537854112487822}
   - component: {fileID: 8594834030708906531}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toilet
   m_TagString: Wall
   m_Icon: {fileID: 0}
