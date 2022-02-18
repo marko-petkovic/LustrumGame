@@ -451,7 +451,7 @@ MonoBehaviour:
   moveSpeed: 5.61
   forgetTime: 2.5
   reloadTime: 2
-  burstTime: 0.25
+  burstTime: 0.125
   bulletForce: 300
   burstLength: 15
   distanceTres: 30
