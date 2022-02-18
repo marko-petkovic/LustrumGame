@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     private Transform textLoc;
     public Text addScoreText;
 
+    public string origin = "enemy";
 
     private AudioManager audioManager;
 
@@ -24,11 +25,15 @@ public class Bullet : MonoBehaviour
 
     private HealthManager health;
 
+    private Shooting shooting;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         textLoc = GameObject.FindGameObjectWithTag("TextLoc").transform;
         insTime = DateTime.Now;
+
+        shooting = GameObject.FindGameObjectWithTag("Player").GetComponent<Shooting>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,6 +42,7 @@ public class Bullet : MonoBehaviour
         GameObject col = collision.collider.gameObject;
         var instPos = col.transform.position;
 
+        int mult = 1;
         
         if (col.tag == "Wall" || col.tag == "PlayerWall")
         {
@@ -66,25 +72,33 @@ public class Bullet : MonoBehaviour
                     pauseMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<PauseMenu>();
                     pauseMenu.DeathMenu();
                 }
+                if (origin == "Player")
+                    mult = shooting.multFactor;
                 if (col.tag == "Gewis" && col.name != "Boss")
                 {
-                    PlayerScore.Score += 50;
+
+                    PlayerScore.Score += mult*50;
                     var txt = Instantiate(addScoreText, textLoc);
-                    txt.text = "Enemy killed: +50";
+                    txt.text = string.Format("Enemy killed: +{0}", mult*50);
                     Destroy(txt, 10f);
+                    shooting.AddKill();
                 }
                 else if (col.name == "Boss")
                 {
-                    PlayerScore.Score += 300;
+                    PlayerScore.Score += mult*300;
                     var txt = Instantiate(addScoreText, textLoc);
-                    txt.text = "Boss killed: +300";
+                    txt.text = string.Format("Boss killed: +{0}", mult*300);
                     Destroy(txt, 10f);
+
+                    shooting.AddKill();
                 }
                 if (col.tag == "Boomer")
                 {
-                    PlayerScore.Score += 100;
+                    PlayerScore.Score += mult*100;
                     var txt = Instantiate(addScoreText, textLoc);
-                    txt.text = "Suicider killed: +75";
+                    txt.text = string.Format("Suicider killed: +{0}", mult*100);
+
+                    shooting.AddKill();
                     try
                     {
                         col.GetComponent<SuiciderMovement>().Boom();

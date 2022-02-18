@@ -51,13 +51,20 @@ public class Shooting : MonoBehaviour
 
     public TextMeshProUGUI clip;
     public TextMeshProUGUI ammo;
+    public TextMeshProUGUI mult;
 
     private DateTime reloadStart = DateTime.Now.AddSeconds(-10d);
     private List<float> damageMultiplier = new List<float> { 0.5f, 1f, 1.5f, 2f };
     public float gunWaitTime = 5f;
     private DateTime gunTime;
     public float bulletForce = 200f;
-    
+
+
+    public List<int> scoreMultiplierReqs = new List<int> { 0, 2, 4, 8, 10 };
+    public List<Color> scoreMultColors = new List<Color> { new Color(1, 1, 1), new Color(.75f, 1, .75f), new Color(.5f, 1, .5f), new Color(.25f, 1, .25f), new Color(0, 1, 0) };
+    public int recentKills = 0;
+    public int multFactor = 1;
+
     // Update is called once per frame
     void Update()
     {
@@ -138,6 +145,7 @@ public class Shooting : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<Bullet>().origin = "Player";
         bullet.GetComponent<Bullet>().damage *= damageMultiplier[gunLevel];
         //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -161,6 +169,7 @@ public class Shooting : MonoBehaviour
     {
         var bullet1 = Instantiate(bulletPrefab, extraGun.position, extraGun.rotation);
         bullet1.GetComponent<Bullet>().damage *= damageMultiplier[gunLevel];
+        bullet1.GetComponent<Bullet>().origin = "Player";
         //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb1 = bullet1.GetComponent<Rigidbody2D>();
         rb1.AddForce(extraGun.up * bulletForce, ForceMode2D.Impulse);
@@ -209,6 +218,26 @@ public class Shooting : MonoBehaviour
             gunLevel++;
             currentGun.sprite = gunList[gunLevel];
         }
+    }
+
+
+    public void AddKill()
+    {
+        recentKills++;
+        int i = 0;
+        while (recentKills >= scoreMultiplierReqs[i])
+            i++;
+        multFactor = i;
+        mult.text = string.Format("{0}x", multFactor);
+        mult.color = scoreMultColors[multFactor - 1];
+        StartCoroutine(RemoveKill());
+
+    }
+
+    IEnumerator RemoveKill()
+    {
+        yield return new WaitForSeconds(8f);
+        recentKills--;
     }
         
 }

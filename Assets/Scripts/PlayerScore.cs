@@ -9,6 +9,9 @@ public static class PlayerScore
     public static int ammoAmount=90;
     public static int bulletsInClip=30;
 
+
+
+    
     public static void SetDefaultValues()
     {
         Score = 0;
