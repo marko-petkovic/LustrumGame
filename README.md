@@ -2,4 +2,4 @@
  LuCo game :))
  
  
-Find the game [here](merkelmauer.github.io/LustrumGame)
+Find the game [here](https://merkelmauer.github.io/LustrumGame)
