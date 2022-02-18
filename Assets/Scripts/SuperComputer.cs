@@ -8,6 +8,10 @@ public class SuperComputer : MonoBehaviour
 
     public List<GameObject> gpus;
     public GameObject switcherino;
+    public GameObject switcherino2;
+
+    public bool doubleSwitch = false;
+
     public Animator superCompAnim;
     public Animator doors;
     public Sprite switchOpen;
@@ -32,6 +36,8 @@ public class SuperComputer : MonoBehaviour
         if ( allGPUS && collision.gameObject.tag == "Player")
         {
             switcherino.GetComponent<SpriteRenderer>().sprite = switchOpen;
+            if (doubleSwitch)
+                switcherino2.GetComponent<SpriteRenderer>().sprite = switchOpen;
             doors.SetBool("OpenDoor", true);
         }
     }
