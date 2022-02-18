@@ -448,12 +448,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14f69f64a07b514382a379b26ccb284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5.61
+  moveSpeed: 5.5
   forgetTime: 2.5
   reloadTime: 2
   burstTime: 0.125
   bulletForce: 300
-  burstLength: 15
+  burstLength: 20
   distanceTres: 30
   shotgun: 0
   doublegun: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3610146113163027571, guid: 8f401bf51c97426478db7c791b9dbce3,
     type: 3}
   playerObject: {fileID: 0}
-  bulletDamage: 25
+  bulletDamage: 15
   eyes: {fileID: 7424386775179376441}
   waypoints:
   - {fileID: 0}

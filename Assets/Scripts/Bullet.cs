@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System;
 
 public class Bullet : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Bullet : MonoBehaviour
 
     private PauseMenu pauseMenu;
 
+    private DateTime insTime;
 
     private HealthManager health;
 
@@ -26,6 +28,7 @@ public class Bullet : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         textLoc = GameObject.FindGameObjectWithTag("TextLoc").transform;
+        insTime = DateTime.Now;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -149,7 +152,7 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else
+        else if ((DateTime.Now - insTime).TotalSeconds > .05f)
         {
             audioManager.Play("Wall", transform.position);
             GameObject effect = Instantiate(explosion, transform.position, transform.rotation);

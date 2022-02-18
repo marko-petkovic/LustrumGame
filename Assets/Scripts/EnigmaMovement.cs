@@ -42,6 +42,8 @@ public class EnigmaMovement : MonoBehaviour
     private bool returningToPatrol = false;
 
     private Animator anim;
+    private float pathLength=10000000;
+
 
     Path path;
     int currentWaypoint = 0;
@@ -80,7 +82,10 @@ public class EnigmaMovement : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
+            pathLength = path.GetTotalLength();
         }
+
+
     }
 
     void UpdatePath()
@@ -165,7 +170,7 @@ public class EnigmaMovement : MonoBehaviour
                     returningToPatrol = false;
                     ChaseCharacter(false);
                 }
-                else if ((Vector2.Distance(transform.position, player.transform.position)) < 30f)
+                else if ((Vector2.Distance(transform.position, player.transform.position)) < 30f && pathLength < 100)
                 {
                     chasing = true;
                     returningToPatrol = false;
@@ -232,8 +237,9 @@ public class EnigmaMovement : MonoBehaviour
             for (int i = 0; i < bulletRotations.Count; i++)
             {
                 var bulRot = firePoint.rotation;
+                var bulPos = firePoint.position;
                 bulRot.z += bulletRotations[i];
-                var bullet = Instantiate(bulletPrefab, firePoint.position, bulRot);
+                var bullet = Instantiate(bulletPrefab, bulPos, bulRot);
                 bullet.GetComponent<Bullet>().damage = bulletDamage;
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 rb.AddForce(bullet.transform.up * bulletForce, ForceMode2D.Impulse);

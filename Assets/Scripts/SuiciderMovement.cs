@@ -59,6 +59,7 @@ public class SuiciderMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerObject = GameObject.FindGameObjectWithTag("Player");
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         textLoc = GameObject.FindGameObjectWithTag("TextLoc").transform;
         boomCircle = GetComponent<CircleCollider2D>();

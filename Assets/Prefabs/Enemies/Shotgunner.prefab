@@ -551,11 +551,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14f69f64a07b514382a379b26ccb284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5.61
+  moveSpeed: 6
   forgetTime: 3.5
   reloadTime: 2
   burstTime: 2
-  bulletForce: 352.52
+  bulletForce: 600
   burstLength: 2
   distanceTres: 10
   shotgun: 1
@@ -723,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3648922015394297574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 2.02, z: 0}
+  m_LocalPosition: {x: 0, y: 1.98, z: 0}
   m_LocalScale: {x: 0.18235405, y: 0.9215595, z: 0.6952043}
   m_Children: []
   m_Father: {fileID: 3648922015349171222}
