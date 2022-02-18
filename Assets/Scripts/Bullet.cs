@@ -149,6 +149,12 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
-
+        else
+        {
+            audioManager.Play("Wall", transform.position);
+            GameObject effect = Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(effect, .75f);
+            Destroy(gameObject);
+        }
     }
 }

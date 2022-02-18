@@ -32,9 +32,6 @@ public class EnigmaWall : MonoBehaviour
 
             GameObject effect = Instantiate(bloodSplash, col.transform.position, Quaternion.identity);
             Destroy(effect, .75f);
-            Destroy(gameObject);
-
-
 
 
             if (health.Health <= 0)
@@ -42,7 +39,7 @@ public class EnigmaWall : MonoBehaviour
                 health.DeathHealth();
                 pauseMenu = GameObject.FindGameObjectWithTag("Menu").GetComponent<PauseMenu>();
                 pauseMenu.DeathMenu();
-
+                Destroy(col);
             }
         }     
     }
