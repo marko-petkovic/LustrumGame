@@ -86,6 +86,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         highScores.SetActive(true);
+        title.SetActive(false);
     }
 
     public void QuitGame()

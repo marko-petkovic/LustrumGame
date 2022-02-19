@@ -461,7 +461,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: aff043eb5eb5af14497f90756b394a01, type: 2}
   highScoreText: {fileID: 477223253}
   highNameText: {fileID: 1302403371}
-  title: {fileID: 1398705071}
+  title: {fileID: 1679927874}
   howTo: {fileID: 605903612}
   highScores: {fileID: 94769281}
   general: {fileID: 456822945}
@@ -2977,7 +2977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -770, y: -80}
+  m_AnchoredPosition: {x: -770, y: 72}
   m_SizeDelta: {x: 500, y: -160}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &477223253
@@ -3405,7 +3405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 173}
+  m_AnchoredPosition: {x: 0, y: 399}
   m_SizeDelta: {x: 258.42017, y: 492.67114}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &545325969
@@ -6186,7 +6186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -80}
+  m_AnchoredPosition: {x: 170, y: 72}
   m_SizeDelta: {x: 500, y: -160}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1302403371
@@ -8057,7 +8057,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -80}
+  m_AnchoredPosition: {x: 0, y: 72}
   m_SizeDelta: {x: 150, y: -160}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1796423964
