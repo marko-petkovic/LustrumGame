@@ -232,12 +232,11 @@ public class Shooting : MonoBehaviour
     public void UpdateMult()
     {
         int i = 0;
-        while (recentKills >= scoreMultiplierReqs[i])
+        while (i < scoreMultiplierReqs.Count && recentKills >= scoreMultiplierReqs[i])
             i++;
         multFactor = i;
         mult.text = string.Format("{0}x", multFactor);
-        mult.color = scoreMultColors[multFactor - 1];
-
+        mult.color = scoreMultColors[i - 1];
     }
 
 

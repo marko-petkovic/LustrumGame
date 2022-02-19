@@ -17,7 +17,8 @@ public class EnigmaCameraActivator : MonoBehaviour
         {
             foreach (var item in movementControl)
             {
-                item.enabled = true;
+                if (item != null)
+                    item.enabled = true;
             }
         }
     }
