@@ -19,7 +19,7 @@ public class OldLevel : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject col = collision.gameObject;
-        Debug.Log(col.tag + "aTag");
+       
 
         if (col.tag == "Player" && !addedScore)
         {

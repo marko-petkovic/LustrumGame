@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd7e7423862f8446aaec33f7d152f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 400
   maxHealth: 0
   healthBar: {fileID: 7424386776894992873}
 --- !u!114 &7424386776893866327
@@ -450,9 +450,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   forgetTime: 10
-  reloadTime: 4
-  burstTime: 4
-  bulletForce: 110
+  reloadTime: 2
+  burstTime: 2
+  bulletForce: 150
   burstLength: 5
   distanceTres: 10
   shotgun: 0

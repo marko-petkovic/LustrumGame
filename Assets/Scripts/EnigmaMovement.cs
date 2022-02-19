@@ -125,9 +125,14 @@ public class EnigmaMovement : MonoBehaviour
                 if (hit.collider.tag == "Player" || hit.collider.tag == "PlayerWall")
                 {
 
-                    if (!chasing && boss)
+
+                    //Debug.Log("cb:" + (!chasing && boss));
+     
+
+                    if (boss)
                     {
                         anim.SetBool("chasing", true);
+                            
                     }
 
                     returningToPatrol = false;
