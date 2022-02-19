@@ -224,19 +224,27 @@ public class Shooting : MonoBehaviour
     public void AddKill()
     {
         recentKills++;
+        UpdateMult();
+        StartCoroutine(RemoveKill());
+
+    }
+
+    public void UpdateMult()
+    {
         int i = 0;
         while (recentKills >= scoreMultiplierReqs[i])
             i++;
         multFactor = i;
         mult.text = string.Format("{0}x", multFactor);
         mult.color = scoreMultColors[multFactor - 1];
-        StartCoroutine(RemoveKill());
 
     }
+
 
     IEnumerator RemoveKill()
     {
         yield return new WaitForSeconds(8f);
+        UpdateMult();
         recentKills--;
     }
         

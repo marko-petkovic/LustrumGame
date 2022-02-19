@@ -98,7 +98,6 @@ public class Bullet : MonoBehaviour
                     var txt = Instantiate(addScoreText, textLoc);
                     txt.text = string.Format("Suicider killed: +{0}", mult*100);
 
-                    shooting.AddKill();
                     try
                     {
                         col.GetComponent<SuiciderMovement>().Boom();
@@ -107,7 +106,9 @@ public class Bullet : MonoBehaviour
                     {
                         col.GetComponent<EnigmaMine>().Explode();
                     }
-                        
+
+                    shooting.AddKill();
+
                 }
                 else
                 {
