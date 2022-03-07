@@ -73,7 +73,7 @@ public class EnigmaMovement : MonoBehaviour
         bulletsInMag = burstLength;
         rb = GetComponent<Rigidbody2D>();
         seeker = GetComponent<Seeker>();
-        InvokeRepeating("UpdatePath", 0f, .5f);
+        InvokeRepeating("UpdatePath", 0f, 2f);
     }
 
     void OnPathComplete(Path p)
@@ -116,8 +116,8 @@ public class EnigmaMovement : MonoBehaviour
             Vector3 direction = player.position - eyes.position;
 
             //Debug.DrawRay(eyes.position, direction);
-
-            hit = (Physics2D.Raycast(eyes.position, direction));
+            int lm = ~LayerMask.GetMask("IgnoreCollision");
+            hit = (Physics2D.Raycast(eyes.position, direction, Mathf.Infinity, lm));
             if (hit.collider != null)
             {
                 //Debug.Log(hit.transform.name);
